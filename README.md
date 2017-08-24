@@ -1,2 +1,2 @@
-# Wunderlist-like-app
-Wunderlist-like todo app
+# Wunderlist-like app for now, later hifzapp
+Basic todo app
