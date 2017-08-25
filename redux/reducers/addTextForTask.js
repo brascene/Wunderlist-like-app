@@ -1,3 +1,5 @@
+import {REHYDRATE} from 'redux-persist/constants'
+
 export default function reducer(state = {
   message: ''
 }, action = {}) {
@@ -12,6 +14,13 @@ export default function reducer(state = {
       message: ''
     }
 	}
+  case 'persist/REHYDRATE': {
+    var incoming = action.payload
+    return {
+      ...state,
+      message: ''
+    }
+  }
 }
 return state
 }

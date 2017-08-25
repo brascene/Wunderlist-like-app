@@ -28,6 +28,7 @@ class HifzApp extends Component {
     let taskIndex = this.props.taskList.findIndex(x => x.taskKey === taskKey)
     return this.props.taskList[taskIndex].taskChecked ? checkArrows[1] : checkArrows[0]
   }
+
   render() {
     return (
       <View style={styles.container}>
