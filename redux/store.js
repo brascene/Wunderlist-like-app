@@ -6,8 +6,6 @@ import reducers from './reducers/index'
 import { composeWithDevTools } from 'remote-redux-devtools'
 import { autoRehydrate, persistStore } from 'redux-persist'
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
-
 let store = compose(
   composeWithDevTools(
     applyMiddleware(thunk),
