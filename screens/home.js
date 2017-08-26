@@ -26,7 +26,11 @@ class HifzApp extends Component {
   _keyExtractor = (item, index) => item.taskKey
   _currentStatus = (taskKey) => {
     let taskIndex = this.props.taskList.findIndex(x => x.taskKey === taskKey)
-    return this.props.taskList[taskIndex].taskChecked ? checkArrows[1] : checkArrows[0]
+    if (taskIndex != -1) {
+      return this.props.taskList[taskIndex].taskChecked ? checkArrows[1] : checkArrows[0]
+    } else {
+      return checkArrows[1]
+    }
   }
 
   render() {
@@ -45,9 +49,25 @@ class HifzApp extends Component {
             currentText={this.props.currentTaskText}
             taskDescriptionInserted={this.props.taskDescriptionInserted} />
             </View>
-            <View style={{backgroundColor: 'transparent', width:'100%', height:380, marginTop: 10}}>
+            <View style={{backgroundColor: 'transparent', width:'100%', height:200, marginTop: 10}}>
               <FlatList
                 data={this.props.taskList}
+                keyExtractor={this._keyExtractor}
+                renderItem={({item}) => <SingleTaskRow
+                 message={item.taskDescription}
+                 taskKey={item.taskKey}
+                 taskStatusChanged={this.props.changeTaskStatus}
+                 currentStatus={this._currentStatus}
+                  />}
+              />
+            </View>
+            <View style={{height: 6, width: width - 20,
+            marginTop:10, marginLeft: 10, marginRight: 10,
+             backgroundColor:'#fff'}}>
+            </View>
+            <View style={{backgroundColor: 'transparent', width:'100%', height:200, marginTop: 10}}>
+              <FlatList
+                data={this.props.completedTasks}
                 keyExtractor={this._keyExtractor}
                 renderItem={({item}) => <SingleTaskRow
                  message={item.taskDescription}
@@ -78,9 +98,13 @@ HifzApp.propTypes = {
 }
 
 function mapStateToProps(state) {
+  let tasks = state.addTaskReducer.taskList
+  let completedTasks = tasks.filter(singleTask => singleTask.taskChecked)
+  let allTasks = tasks.filter(singleTask => !singleTask.taskChecked)
   return {
     currentTaskText: state.addTextForTask.message,
-    taskList: state.addTaskReducer.taskList
+    completedTasks,
+    taskList: allTasks,
   }
 }
 
