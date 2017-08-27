@@ -40,7 +40,7 @@ export const SingleInputField = ({taskDescriptionInserted, currentText}) => (
   <TextInput
     keyboardType='default'
     style={styles.textInput}
-    placeholder="Create your new task"
+    placeholder="Dodaj novu aktivnost na listu"
     placeholderTextColor="#fff"
     value={currentText}
     onChangeText={(text) => taskDescriptionInserted(text)}
@@ -59,8 +59,8 @@ SingleInputField.propTypes = {
 export const SingleTaskRow = ({message, taskKey, taskStatusChanged, currentStatus}) => (
   <View style={{width:width-20, marginTop:5, marginLeft: 10, marginRight: 10,
     flexDirection:'row', justifyContent:'space-between',
-  backgroundColor:'#142842', opacity: 0.7, borderBottomColor: 'gray', borderWidth: 0.5}}>
-    <Text style={{marginTop: 10, fontSize:14, fontWeight: '500',
+  backgroundColor:'#142842', opacity: 0.8, borderBottomColor: 'gray', borderWidth: 0.5}}>
+    <Text style={{marginTop: 10, fontSize:14, fontWeight: '900',
     width:0.8*width, marginLeft:20, paddingBottom: 12, paddingTop: 3,
     textAlign:'left', color:'#fff'}}>
       {message}

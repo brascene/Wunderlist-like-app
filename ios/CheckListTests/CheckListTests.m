@@ -16,11 +16,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React Native!"
 
-@interface HifzAppTests : XCTestCase
+@interface CheckListTests : XCTestCase
 
 @end
 
-@implementation HifzAppTests
+@implementation CheckListTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {

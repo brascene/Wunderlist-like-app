@@ -1,3 +1,7 @@
+import React from 'react'
+import { AsyncStorage } from 'react-native'
+import { purgeStoredState } from 'redux-persist'
+
 export default function reducer(state = {
   taskList: []
 }, action = {}) {
@@ -14,6 +18,18 @@ export default function reducer(state = {
     let taskIndex = newTaskList.findIndex(x => x.taskKey === action.payload)
     newTaskList[taskIndex].taskChecked = !newTaskList[taskIndex].taskChecked
     return {...state, taskList: newTaskList}
+  }
+  case 'CLEAR_ALL_TASKS': {
+    purgeStoredState({storage: AsyncStorage}, ['addTaskReducer']).then(() => {
+      console.log('purge of someReducer completed')
+      return state
+    }).catch(() => {
+      return state
+      console.log('purge of someReducer failed')
+    })
+    return {
+      taskList: []
+    }
   }
 }
 return state

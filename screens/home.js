@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { AddButton, SingleInputField, SingleTaskRow} from '../src/components/singleTask'
+import { Button } from 'react-native-elements'
 
 //next koraci: (finished)
 /*
@@ -17,7 +18,7 @@ import { AddButton, SingleInputField, SingleTaskRow} from '../src/components/sin
 import actionNames from '../redux/actionNames'
 import { connect } from 'react-redux'
 import { addTask, taskDescriptionInserted } from '../redux/actions/addTask'
-import { changeTaskStatus, resetTaskInput } from '../redux/actions/changeTaskStatus'
+import { changeTaskStatus, resetTaskInput, clearAllTasks } from '../redux/actions/changeTaskStatus'
 
 const {height, width} = Dimensions.get('window');
 const checkArrows = ["ios-checkmark-circle-outline","md-checkmark-circle"]
@@ -31,6 +32,9 @@ class HifzApp extends Component {
     } else {
       return checkArrows[1]
     }
+  }
+  _clearAllTasks = () => {
+    this.props.clearAllTasks()
   }
 
   render() {
@@ -61,7 +65,7 @@ class HifzApp extends Component {
                   />}
               />
             </View>
-            <View style={{height: 6, width: width - 20,
+            <View style={{height: 3, width: width - 20,
             marginTop:10, marginLeft: 10, marginRight: 10,
              backgroundColor:'#fff'}}>
             </View>
@@ -77,6 +81,21 @@ class HifzApp extends Component {
                   />}
               />
             </View>
+            <View style={{width:200, marginTop: 5, opacity: this.props.shouldShowDeleteButton, alignSelf: 'center', backgroundColor:'transparent'}}>
+            <Button
+              onPress={this._clearAllTasks}
+              raised
+              icon={{name: 'times-rectangle-o', type: 'font-awesome', size: 20}}
+              textStyle={{
+                textAlign: 'left',
+                fontSize: 17, fontWeight: '800'
+              }}
+              buttonStyle = {{
+                backgroundColor: '#2D1462', opacity: this.props.shouldShowDeleteButton,
+                width:200, alignSelf:'center'
+              }}
+              title='Izbrisi sve' />
+            </View>
           </ImageBackground>
         </View>
       </View>
@@ -88,7 +107,9 @@ HifzApp.propTypes = {
   addTask: PropTypes.func.isRequired,
   taskDescriptionInserted: PropTypes.func.isRequired,
   resetTaskInput: PropTypes.func.isRequired,
+  clearAllTasks: PropTypes.func.isRequired,
   currentTaskText: PropTypes.string,
+  shouldShowDeleteButton: PropTypes.number,
   changeTaskStatus: PropTypes.func.isRequired,
   taskList: PropTypes.arrayOf(PropTypes.shape({
     taskKey: PropTypes.string.isRequired,
@@ -101,14 +122,18 @@ function mapStateToProps(state) {
   let tasks = state.addTaskReducer.taskList
   let completedTasks = tasks.filter(singleTask => singleTask.taskChecked)
   let allTasks = tasks.filter(singleTask => !singleTask.taskChecked)
+  completedTasks.reverse()
+  allTasks.reverse()
+  let shouldShowDeleteButton = tasks.length > 0 ? 0.9 : 0.0
   return {
     currentTaskText: state.addTextForTask.message,
     completedTasks,
     taskList: allTasks,
+    shouldShowDeleteButton
   }
 }
 
-export default connect(mapStateToProps, { addTask, taskDescriptionInserted, changeTaskStatus, resetTaskInput })(HifzApp)
+export default connect(mapStateToProps, { addTask, taskDescriptionInserted, clearAllTasks, changeTaskStatus, resetTaskInput })(HifzApp)
 
 const styles = StyleSheet.create({
   container: {

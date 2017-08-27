@@ -1,4 +1,4 @@
-package com.hifzapp;
+package com.checklist;
 
 import com.facebook.react.ReactActivity;
 import com.reactnativenavigation.controllers.SplashActivity;

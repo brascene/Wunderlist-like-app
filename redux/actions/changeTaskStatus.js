@@ -12,3 +12,9 @@ export const resetTaskInput = () => {
     type: 'RESET_TASK_INPUT',
   }
 }
+
+ export const clearAllTasks = () => {
+   return {
+     type: 'CLEAR_ALL_TASKS'
+   }
+ }

@@ -1,4 +1,4 @@
-package com.hifzapp;
+package com.checklist;
 
 import android.support.annotation.Nullable;
 

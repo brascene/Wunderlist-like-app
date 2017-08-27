@@ -11,13 +11,13 @@ registerScreens(store, Provider)
 
 const tabs = [
   {
-    label: 'Home',
+    label: 'Pocetna',
     screen: 'home',
     icon: require('../images/ic_action_home.png'),
-    title: 'Wunderlist'
+    title: 'Lista aktivnosti'
   },
   {
-    label: 'Profile',
+    label: 'Profil',
     screen: 'profile',
     icon: require('../images/ic_action_account_box.png'),
     title: 'Profile page'
@@ -28,17 +28,17 @@ Navigation.startTabBasedApp({
   tabs,
   animationType: 'fade',
    appStyle: {
-     //tabBarBackgroundColor: '#003a66',
-     navBarButtonColor: '#ffffff',
+     tabBarBackgroundColor: '#2D1462',
+     navBarButtonColor: '#2D1462',
      tabBarButtonColor: '#ffffff',
      navBarTextColor: '#ffffff',
      tabBarSelectedButtonColor: '#ffffff',
      //navigationBarColor: '#003a66',
-     //navBarBackgroundColor: '#003a66',
-     statusBarColor: '#002b4c',
+     navBarBackgroundColor: '#2D1462',
+     statusBarColor: '#2D1462',
      tabFontFamily: 'BioRhyme-Bold',
      forceTitlesDisplay: true,
-     navigationBarColor: '#002b4c',
+     navigationBarColor: '#2D1462',
      navBarTitleTextCentered: true
    }
 })
