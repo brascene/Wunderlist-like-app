@@ -50,10 +50,13 @@ class HifzApp extends Component {
             addNewTask={this.props.addTask}
             currentTaskText={this.props.currentTaskText} />
             <SingleInputField
+            addNewTask={this.props.addTask}
+            resetTaskInput={this.props.resetTaskInput}
             currentText={this.props.currentTaskText}
             taskDescriptionInserted={this.props.taskDescriptionInserted} />
             </View>
-            <View style={{backgroundColor: 'transparent', width:'100%', height:200, marginTop: 10}}>
+            <View style={{backgroundColor: 'transparent', width:'100%',
+             height:0.23*height, marginTop: 10}}>
               <FlatList
                 data={this.props.taskList}
                 keyExtractor={this._keyExtractor}
@@ -69,7 +72,8 @@ class HifzApp extends Component {
             marginTop:10, marginLeft: 10, marginRight: 10,
              backgroundColor:'#fff'}}>
             </View>
-            <View style={{backgroundColor: 'transparent', width:'100%', height:200, marginTop: 10}}>
+            <View style={{backgroundColor: 'transparent', width:'100%',
+             height:0.3*height, marginTop: 10}}>
               <FlatList
                 data={this.props.completedTasks}
                 keyExtractor={this._keyExtractor}
@@ -81,7 +85,9 @@ class HifzApp extends Component {
                   />}
               />
             </View>
-            <View style={{width:200, marginTop: 5, opacity: this.props.shouldShowDeleteButton, alignSelf: 'center', backgroundColor:'transparent'}}>
+            <View style={{width:200, marginTop: 15,
+               opacity: this.props.shouldShowDeleteButton,
+               alignSelf: 'center', backgroundColor:'transparent'}}>
             <Button
               onPress={this._clearAllTasks}
               raised

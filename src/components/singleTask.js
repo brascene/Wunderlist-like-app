@@ -36,20 +36,29 @@ AddButton.propTypes = {
 
 //*********************Single Input Field*********************
 
-export const SingleInputField = ({taskDescriptionInserted, currentText}) => (
+export const SingleInputField = ({taskDescriptionInserted, resetTaskInput, addNewTask, currentText}) => (
   <TextInput
     keyboardType='default'
     style={styles.textInput}
     placeholder="Dodaj novu aktivnost na listu"
     placeholderTextColor="#fff"
     value={currentText}
-    onChangeText={(text) => taskDescriptionInserted(text)}
+    onChangeText={(text) => {
+      console.log('Uneseno slovo')
+      taskDescriptionInserted(text)
+    }}
+    onSubmitEditing={() => {
+      addNewTask(currentText)
+      resetTaskInput()
+    }}
   />
 )
 
 SingleInputField.propTypes = {
   currentText: PropTypes.string.isRequired,
-  taskDescriptionInserted: PropTypes.func.isRequired
+  resetTaskInput: PropTypes.func.isRequired,
+  taskDescriptionInserted: PropTypes.func.isRequired,
+  addNewTask: PropTypes.func.isRequired
 }
 //*********************Single Input Field*********************
 
@@ -62,7 +71,8 @@ export const SingleTaskRow = ({message, taskKey, taskStatusChanged, currentStatu
   backgroundColor:'#142842', opacity: 0.8, borderBottomColor: 'gray', borderWidth: 0.5}}>
     <Text style={{marginTop: 10, fontSize:14, fontWeight: '900',
     width:0.8*width, marginLeft:20, paddingBottom: 12, paddingTop: 3,
-    textAlign:'left', color:'#fff'}}>
+    textAlign:'left', color:'#fff'}}
+    >
       {message}
     </Text>
     <View style={{flexGrow: 1, justifyContent:'center', alignItems: 'center'}}>
